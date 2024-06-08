@@ -7,8 +7,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 import pickle
 import subprocess
-# import os
-# import requests
 
 def lipinski_descriptors(canonical_smile):
     molecule = Chem.MolFromSmiles(canonical_smile)
@@ -44,7 +42,7 @@ def train_model(df4):
     df3_selection = df_final[["canonical_smiles", "molecule_chembl_id"]]
     df3_selection.to_csv('../data/molecule.smi', sep='\t', index=False, header=False)
 
-    padel_command = "java -Xms1G -Xmx1G -Djava.awt.headless=true -jar ../PaDEL-Descriptor/PaDEL-Descriptor.jar -removesalt -standardizenitro -fingerprints -descriptortypes ../PaDEL-Descriptor/PubchemFingerprinter.xml -dir ../data/molecule.smi -file ../data/descriptors_output.csv"
+    padel_command = "java -Xms1G -Xmx1G -Djava.awt.headless=true -jar ../PaDEL-Descriptor/PaDEL-Descriptor.jar -removesalt -standardizenitro -fingerprints -descriptortypes ../PaDEL-Descriptor/PubchemFingerprinter.xml -dir ../data -file ../data/descriptors_output.csv"
     subprocess.run(padel_command, shell=True)
 
     df3_X = pd.read_csv('../data/descriptors_output.csv')
@@ -60,6 +58,11 @@ def train_model(df4):
         return pd.DataFrame(selected_data, columns=selected_columns)
 
     df3_X = remove_low_variance(df3_X, threshold=0.1)
+
+    # Save the list of selected descriptors
+    with open('../data/descriptor_list.csv', 'w') as f:
+        for col in df3_X.columns:
+            f.write(f"{col}\n")
 
     X_train, X_test, Y_train, Y_test = train_test_split(df3_X, df3_Y, test_size=0.2)
     model = RandomForestRegressor(n_estimators=100, random_state=42)
