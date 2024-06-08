@@ -15,7 +15,7 @@ Azure Machine Learning
 ### Industry
 Health
 
-### Bioactivity Prediction
+### Project Title
 Bioactivity Prediction
 
 ## Setup Instructions
