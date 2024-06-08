@@ -10,21 +10,14 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Download the project from GitHub
-# RUN wget https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project/archive/refs/heads/main.zip && \
-#     unzip main.zip && \
-#     mv Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main/* . && \
-#     rm -rf Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main main.zip
-
 # Clone the GitHub repository
 RUN git clone https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project.git .
 
-# Create the conda environment
+# Create and activate the conda environment
 COPY environment.yml .
-RUN conda env create -f environment.yml
-
-# Activate the conda environment
-SHELL ["conda", "run", "-n", "bioactivity", "/bin/bash", "-c"]
+RUN conda env create -f environment.yml && \
+    echo "source activate $(head -1 environment.yml | cut -d' ' -f2)" > ~/.bashrc
+SHELL ["/bin/bash", "--login", "-c"]
 
 # Set environment variables for Java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -34,4 +27,4 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 EXPOSE 5000
 
 # Run the application
-CMD ["conda", "run", "-n", "bioactivity", "python", "app/app.py"]
+CMD ["python", "app/app.py"]
