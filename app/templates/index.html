@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bioactivity Prediction App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bioactivity Prediction App</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload" id="file-upload-label">
+                Drag and drop a file here or click to upload
+            </label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Predict</button>
+        </form>
+        {% if tables %}
+            <h2>Prediction Results</h2>
+            <div>
+                {% for table in tables %}
+                    {{ table|safe }}
+                {% endfor %}
+            </div>
+            <div>
+                {{ result_html|safe }}
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        const fileInput = document.getElementById('file');
+        const fileUploadLabel = document.getElementById('file-upload-label');
+
+        fileUploadLabel.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadLabel.style.backgroundColor = '#007bff';
+            fileUploadLabel.style.color = '#ffffff';
+        });
+
+        fileUploadLabel.addEventListener('dragleave', () => {
+            fileUploadLabel.style.backgroundColor = '';
+            fileUploadLabel.style.color = '#007bff';
+        });
+
+        fileUploadLabel.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadLabel.style.backgroundColor = '';
+            fileUploadLabel.style.color = '#007bff';
+            fileInput.files = e.dataTransfer.files;
+            fileUploadLabel.textContent = e.dataTransfer.files[0].name;
+        });
+
+        fileUploadLabel.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            fileUploadLabel.textContent = fileInput.files[0].name;
+        });
+    </script>
+</body>
+</html>
