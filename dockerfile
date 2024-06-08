@@ -28,4 +28,4 @@ EXPOSE 80
 
 # Run the application
 # CMD ["python", "app/app.py"]
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "app/app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app.app:app"]
