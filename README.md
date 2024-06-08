@@ -33,13 +33,13 @@ To set up the project environment and deploy the model, follow these steps:
 5. Activate the Conda environment:<br>
 ```conda activate <environment_name>```
 
-6. Run the azure_setup.py script to set up the Azure environment and compute resources.
+6. Run the ```azure_setup.py``` script to set up the Azure environment and compute resources.
 
-7. Run the prepare_data.py script to fetch and preprocess the bioactivity data.
+7. Run the ```prepare_data.py``` script to fetch and preprocess the bioactivity data.
 
-8. Run the train.py script to train the predictive model.
+8. Run the ```train.py``` script to train the predictive model.
 
-9. Run the deploy_model.py script to register and deploy the trained model as a web service.
+9. Run the ```deploy_model.py``` script to register and deploy the trained model as a web service.
 
 ## Usage
 1. prepare_data.py: Prepares the bioactivity data by fetching, preprocessing, and computing descriptors.
