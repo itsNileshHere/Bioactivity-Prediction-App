@@ -24,7 +24,8 @@ ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 80
 
 # Run the application
-CMD ["python", "app/app.py"]
+# CMD ["python", "app/app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app/app.py"]
