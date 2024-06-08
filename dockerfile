@@ -1,5 +1,5 @@
-# Use the official continuumio/miniconda3 image from Docker Hub
-FROM continuumio/miniconda3
+# Use the official Python image from Docker Hub
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -13,14 +13,11 @@ RUN apt-get update && \
 # Clone the GitHub repository
 RUN git clone https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project.git .
 
-# Create and activate the conda environment
-COPY environment.yml .
-RUN conda env create -f environment.yml && \
-    echo "source activate $(head -1 environment.yml | cut -d' ' -f2)" > ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
+# Copy the requirements file
+COPY requirements.txt .
 
-# Activate the conda environment
-SHELL ["conda", "run", "-n", "bioactivity", "/bin/bash", "-c"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables for Java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -30,4 +27,4 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 EXPOSE 5000
 
 # Run the application
-CMD ["conda", "run", "-n", "bioactivity", "python", "app/app.py"]
+CMD ["python", "app/app.py"]
