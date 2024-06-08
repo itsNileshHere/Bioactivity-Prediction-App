@@ -7,8 +7,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 import pickle
 import subprocess
-import os
-import requests
+# import os
+# import requests
 
 def lipinski_descriptors(canonical_smile):
     molecule = Chem.MolFromSmiles(canonical_smile)
