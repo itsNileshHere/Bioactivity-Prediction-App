@@ -6,15 +6,18 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y wget default-jdk unzip && \
+    apt-get install -y git default-jdk && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Download the project from GitHub
-RUN wget https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project/archive/refs/heads/main.zip && \
-    unzip main.zip && \
-    mv Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main/* . && \
-    rm -rf Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main main.zip
+# RUN wget https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project/archive/refs/heads/main.zip && \
+#     unzip main.zip && \
+#     mv Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main/* . && \
+#     rm -rf Microsoft-Future-Ready-Talent-Virtual-Internship-Project-main main.zip
+
+# Clone the GitHub repository
+RUN git clone https://github.com/itsNileshHere/Microsoft-Future-Ready-Talent-Virtual-Internship-Project.git .
 
 # Create the conda environment
 COPY environment.yml .
