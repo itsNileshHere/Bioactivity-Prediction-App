@@ -19,6 +19,9 @@ RUN conda env create -f environment.yml && \
     echo "source activate $(head -1 environment.yml | cut -d' ' -f2)" > ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 
+# Activate the conda environment
+SHELL ["conda", "run", "-n", "bioactivity", "/bin/bash", "-c"]
+
 # Set environment variables for Java
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
@@ -27,4 +30,4 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 EXPOSE 5000
 
 # Run the application
-CMD ["python", "app/app.py"]
+CMD ["conda", "run", "-n", "bioactivity", "python", "app/app.py"]
