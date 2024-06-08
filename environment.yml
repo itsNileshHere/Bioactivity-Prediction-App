@@ -1,0 +1,13 @@
+name: chembl-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas
+  - scikit-learn
+  - rdkit
+  - numpy
+  - pip
+  - pip:
+    - chembl-webresource-client
