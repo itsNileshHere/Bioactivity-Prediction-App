@@ -28,11 +28,11 @@ This section demonstrates how Azure ML Core is integrated into different parts o
 ![Azure Setup](images/azure_setup.png)
 *Azure ML Core is used to set up a machine learning workspace, create an experiment, and establish an environment for running the machine learning model*
 
-### Deploying the Model
+### Model Deployment
 ![Model Deployment](images/deploy_model.png)
 *The Azure ML SDK is being used to manage and deploy machine learning models within the Azure ecosystem.*
 
-### Evaluating the Model
+### Model Evaluation
 ![Model Evaluation](images/predicted.png)
 *The model is evaluated using a web app hosted on Azure. It accepts Canonical smiles as input and predicts the pIC50 value.*
 
