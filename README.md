@@ -1,4 +1,4 @@
-# Microsoft-Future-Ready-Talent-Virtual-Internship-Project
+# Microsoft-FRT-Internship-Project
 
 This is the final project created for Microsoft Future Ready Talent Virtual Internship Program
 
