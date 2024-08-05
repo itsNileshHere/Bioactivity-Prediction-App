@@ -1,4 +1,4 @@
-## ChEMBL Bioactivity Prediction Project
+# ChEMBL Bioactivity Prediction Project
 
 This project focuses on predicting the bioactivity of compounds against the SARS coronavirus target using data from ChEMBL (Chemical Biology Database). The goal is to develop a machine learning model that can accurately classify compounds as active, inactive, or intermediate based on their molecular properties.
 
